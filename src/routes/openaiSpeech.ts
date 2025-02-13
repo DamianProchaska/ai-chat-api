@@ -46,7 +46,7 @@ openAiSpeechRouter.post('/speech', upload.single('file'), async (req: Request, r
 
     const data = await response.json();
     console.log("Whisper API response:", data);
-    return res.json({ text: data.text });
+    return res.json({ text: (data as { text: string }).text });
   } catch (error) {
     console.error("Wyjątek w speech endpoint:", error);
     return res.status(500).json({ error: (error as Error).message });
